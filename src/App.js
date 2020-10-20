@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    fetch('/api/time').then(res => res.json()).then(data => {
+      setCurrentTime(data.time);
+    });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
+        <BrowserRouter>
+          <div>
+            <Link to="/" className="App-link">Home</Link> | <Link  className="App-link" to="/page2">Page 2</Link>
+          </div>
+          <Switch>
+            <Route exact path="/">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -18,6 +33,13 @@ function App() {
         >
           Learn React
         </a>
+        <p>The current time is {currentTime}.</p>
+            </Route>
+            <Route path="/page2">
+              <p>This is page 2</p>
+            </Route>
+        </Switch>
+        </BrowserRouter>
       </header>
     </div>
   );
