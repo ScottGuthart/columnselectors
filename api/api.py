@@ -1,5 +1,6 @@
 import time
-from flask import Flask
+from flask import Flask, request, jsonify
+import pandas as pd
 
 app = Flask(__name__, static_folder="../build", static_url_path='/')
 
@@ -17,3 +18,9 @@ def index():
 @app.route('/api/time')
 def get_current_time():
     return {'time': time.time()}
+
+
+@app.route('/api/columns', methods=['GET', 'POST'])
+def get_columns():
+    file = request.data
+    return jsonify(pd.read_excel(file).columns.values.tolist())

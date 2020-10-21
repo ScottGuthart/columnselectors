@@ -1,47 +1,80 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
-import logo from './logo.svg';
 import './App.css';
+import { Form, Container, Tabs, Tab, Row, Col} from 'react-bootstrap'
+import bsCustomFileInput from "bs-custom-file-input"
+
+import DataFileForm from "./components/DataFileForm"
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
+  const [maxdiffFile, setMaxdiffFile] = useState(undefined);
+  const [maxdiffColumns, setMaxdiffColumns] = useState(["No MaxDiff File"]);
 
   useEffect(() => {
+    bsCustomFileInput.init();
     fetch('/api/time').then(res => res.json()).then(data => {
       setCurrentTime(data.time);
     });
   }, []);
+  useEffect(() => {
+    if(maxdiffFile !== undefined){
+      console.log(maxdiffFile.name)
+      const requestOptions = {
+        method: 'POST',
+        body: maxdiffFile,
+      }
+      setMaxdiffColumns(["Loading..."])
+      fetch('/api/columns', requestOptions)
+      .then(res => res.json())
+      .then(data => {
+        // const { columns } = data
+        console.log(data)
+        setMaxdiffColumns(data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+    else {
+      setMaxdiffColumns(["No MaxDiff file"])
+    }
+  }, [maxdiffFile]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <BrowserRouter>
-          <div>
-            <Link to="/" className="App-link">Home</Link> | <Link  className="App-link" to="/page2">Page 2</Link>
-          </div>
-          <Switch>
-            <Route exact path="/">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Container className="p-3" style={{maxWidth: "800px"}}>
+      <h1 class="pb-3">Augmented MaxDiff</h1>
+      <Tabs variant="tabs" defaultActiveKey="upload">
+        <Tab eventKey="upload" title="Upload">
+          <p class="pt-3">
+            <Form >
+              {/* <MaxDiffForm 
+                onChange={f => setMaxdiffFile(f)}
+                maxdiffColumns = {maxdiffColumns}
+              /> */}
+              <DataFileForm 
+                name= "Max Diff File"
+                accept= ".csv, .xlsx, .xls, .sav"
+                onChange= {f=> setMaxdiffFile(f)}
+                columns= {maxdiffColumns}
+                ColumnSelectors= {[
+                  {
+                    name: "Best Columns",
+                    instructions: "Select the columns with the data for the best item",
+                  },
+                  {
+                    name: "Worst Columns",
+                    instructions: "Select the columns with the data for the worst item",
+                  },
+                ]}
+              />
+            </Form>
+          </p>
+        </Tab>
+        <Tab eventKey="select-data" title="Select Data">
+        </Tab>
+      </Tabs>
         <p>The current time is {currentTime}.</p>
-            </Route>
-            <Route path="/page2">
-              <p>This is page 2</p>
-            </Route>
-        </Switch>
-        </BrowserRouter>
-      </header>
-    </div>
+    </Container>
   );
 }
 
