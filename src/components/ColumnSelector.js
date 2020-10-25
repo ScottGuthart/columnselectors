@@ -4,14 +4,14 @@ import { Form, Row, Col} from 'react-bootstrap'
 const ColumnSelector = (props) => {
   return (
     <>
-        <Form.Group as={Row}>
-          <Form.Label column sm={2}>
+        {/* <Form.Group as={Row}> */}
+          <Form.Label sm={1}>
             {props.name}
             <Form.Text className="text-muted">
               {props.instructions}
             </Form.Text>
           </Form.Label>
-          <Col sm={10}>
+          <Col sm={5}>
             <Form.Control size="sm" as="select" multiple={true} htmlSize={10} custom>
               {props.columns.map((col, i)=>(
                 <option key={i} value={i}>
@@ -20,7 +20,7 @@ const ColumnSelector = (props) => {
               ))}
             </Form.Control>
           </Col>
-        </Form.Group>
+        {/* </Form.Group> */}
     </>
   )
 }
