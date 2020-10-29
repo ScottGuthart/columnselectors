@@ -10,10 +10,11 @@ const ColumnSender = (props) => {
              multiple={true}
              htmlSize={props.htmlSize}
              onChange={props.onChange}
+             onBlur={props.onBlur}
              value={props.columns
               .filter(column=>column.selected)
               .map(column=>column.value)
-            }
+             }
              disabled={disabled}
              custom
             >
@@ -21,7 +22,7 @@ const ColumnSender = (props) => {
                 props.columns
                 .filter(col=>!col.consumed)
                 .map((col, i)=>(
-                  <option key={i} value={i}>
+                  <option key={col.value} value={col.value}>
                     {col.name}
                   </option>
                 ))

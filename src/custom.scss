@@ -1,0 +1,15 @@
+// Override default variables before the import
+// $body-bg: #000;
+
+ 
+$theme-colors: (
+    "success": rgb(240, 101, 59),	
+    "primary": rgb(40, 124, 157)
+);
+
+$font-family-sans-serif: AverageSans-Regular;
+
+$enable-responsive-font-sizes: true;
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';

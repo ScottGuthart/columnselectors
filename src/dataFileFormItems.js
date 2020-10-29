@@ -3,7 +3,7 @@ const dataFileFormItems = [
     name: "Max Diff File",
     id: 0,
     formats: ".csv, .xlsx, .xls, .sav",
-    ColumnReceivers: [
+    columnReceivers: [
                   {
                     name: "ID",
                     id: 0,

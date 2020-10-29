@@ -1,8 +1,8 @@
 import React from "react"
-import { Form, Row, Col, Button, } from "react-bootstrap"
-import {BsChevronDoubleRight } from "react-icons/bs"
+import { Form, Row, Col, } from "react-bootstrap"
 
 import ColumnReceiverSelect from "./ColumnReceiverSelect"
+import ColumnReceiverButton from "./ColumnReceiverButton"
 import "./ColumnReceiver.css"
 
 const ColumnReceiver = (props) => {
@@ -12,19 +12,33 @@ const ColumnReceiver = (props) => {
         className='d-flex align-items-center p-0'
         style={{justifyContent: "center"}}
       >
-        <Button
+      <ColumnReceiverButton 
+       name={props.name}
+       handleClick={props.handleReceiverButtonClick}
+       buttonAction={props.buttonAction}
+      />
+        {/* <Button
           size=""
           className="text-nowrap"
           variant="primary"
           onClick={props.handleReceiverButtonClick}
         >
-          <BsChevronDoubleRight size="1.0rem" style={{position:"relative", bottom:"1px"}}/>
+          <BsChevronDoubleRight size="1.0rem"
+           style={{position:"relative", bottom:"1px"}}
+          />
             &nbsp;{props.name}&nbsp;
-          <BsChevronDoubleRight size="1.0rem" style={{position:"relative", bottom:"1px"}}/>
-          </Button>
+          <BsChevronDoubleRight size="1.0rem"
+           style={{position:"relative", bottom:"1px"}}
+          />
+          </Button> */}
       </Form.Label>
       <Col sm={7} className="pt-1 pb-1">
-       <ColumnReceiverSelect size={props.size} /> 
+       <ColumnReceiverSelect
+        size={props.size}
+        columns={props.columns}
+        onChange={props.onChange}
+        onBlur={props.onBlur}
+       /> 
       </Col>
     </Row>
   )

@@ -3,7 +3,7 @@ import { Form, Row, Col } from "react-bootstrap"
 
 const FileUploader = (props) => {
   return (
-        <Form.Group as={Row}>
+        <Form.Group as={Row} className="mb-5">
           <Col sm={6}>
             <Form.File
               label={`Select ${props.name}`}
