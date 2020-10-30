@@ -10,7 +10,7 @@ const ColumnSender = (props) => {
              multiple={true}
              htmlSize={props.htmlSize}
              onChange={props.onChange}
-             onBlur={props.onBlur}
+            //  onFocus={props.onFocus}
              value={props.columns
               .filter(column=>column.selected)
               .map(column=>column.value)

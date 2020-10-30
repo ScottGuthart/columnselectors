@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Form, Container, Tabs, Tab, } from 'react-bootstrap'
 import bsCustomFileInput from "bs-custom-file-input"
@@ -8,13 +8,9 @@ import dataFileFormItems from "./dataFileFormItems"
 
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0);
   useEffect(() => {
     console.log('useEffect: Page Load')
     bsCustomFileInput.init();
-    fetch('/api/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    });
   }, []);
 
 
@@ -30,7 +26,7 @@ function App() {
 
   return (
     <Container className="p-3   mt-5" style={{maxWidth: "900px"}}>
-      <h1 className="mb-5">Augmented MaxDiff</h1>
+      <h1 className="mb-5">Column Selector Demo</h1>
       <Tabs variant="tabs" defaultActiveKey="upload">
         <Tab eventKey="upload" title="Upload">
           <p className="pt-3">
@@ -39,10 +35,7 @@ function App() {
             </Form>
           </p>
         </Tab>
-        <Tab eventKey="select-data" title="Select Data">
-        </Tab>
       </Tabs>
-        <p>The current time is {currentTime}.</p>
     </Container>
   );
 }

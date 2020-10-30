@@ -1,31 +1,31 @@
 const dataFileFormItems = [
   {
-    name: "Max Diff File",
+    name: "Excel File",
     id: 0,
     formats: ".csv, .xlsx, .xls, .sav",
     columnReceivers: [
                   {
-                    name: "ID",
+                    name: "Group 1",
                     id: 0,
                     size: 1,
                   },
                   {
-                    name: "Best Tasks",
+                    name: "Group 2",
                     id: 1,
                     size: 5,
                   },
                   {
-                    name: "Worst Tasks",
+                    name: "Group 3",
                     id: 2,
                     size: 5,
                   },
                   {
-                    name: "Best Ranks",
+                    name: "Group 4",
                     id: 3,
                     size: 5,
                   },
                   {
-                    name: "Worst Ranks",
+                    name: "Group 5",
                     id: 4,
                     size: 5,
                   },

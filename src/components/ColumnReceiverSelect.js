@@ -6,10 +6,9 @@ const ColumnReceiverSelect = (props) => {
     return (
           <Form.Control
           onChange={props.onChange}
-          onBlur={props.onBlur}
-          size={props.size === 1 ? "" : "sm"}
+          size="sm"
           as="select"
-          multiple={props.size !== 1}
+          multiple={true}
           value={props.columns
                  .filter(column=>column.selected)
                  .map(column=>column.value)
