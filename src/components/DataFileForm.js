@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useState, useCallback} from "react"
 import { Row, Col } from 'react-bootstrap'
 
 import getSelectedValues from "../getSelectedValues"
@@ -13,6 +13,7 @@ const DataFileForm = (props) => {
   const [activeSelect, setActiveSelect] = useState(null);
   
   const getButtonAction = (receiverID) => {
+    console.log(`getButtonAction ${receiverID}`)
     if (activeSelect !== undefined) {
       if(activeSelect === receiverID) {
         return "depart"
@@ -97,7 +98,8 @@ const DataFileForm = (props) => {
     return senderSize
   }
 
-  const handleReceiverButtonClick = (receiverID) => {
+  const handleReceiverButtonClick = useCallback((receiverID) => {
+    console.log(`handleButton ${receiverID}`)
     setColumns((prevColumns)=> {
       const selectedColumns = prevColumns.filter(column=>column.selected)
       return (
@@ -123,7 +125,7 @@ const DataFileForm = (props) => {
         })
       )
     })
-  }
+  },[])
 
   return (
       <>
